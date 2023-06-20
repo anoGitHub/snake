@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+ngx-snake.black-and-white ngx-snake-tile {
+    background: #fff;
+}
+ngx-snake.black-and-white ngx-snake-tile.free div {
+    background: #fff;
+}
+ngx-snake.black-and-white ngx-snake-tile.head div, ngx-snake.black-and-white ngx-snake-tile.tail div, ngx-snake.black-and-white ngx-snake-tile.food div, ngx-snake.black-and-white ngx-snake-tile.body div {
+    background: #000;
+}

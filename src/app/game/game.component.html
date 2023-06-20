@@ -1,0 +1,78 @@
+<header>
+  <h2 [ngClass]="{ highContrast: gameParameter == 'contrast' }">
+    Hello &nbsp; <b>{{ name }}</b>
+  </h2>
+</header>
+<body>
+  <div class="box">
+    <div>
+      <p class="text">Current points: {{ counter }}</p>
+      <p class="text">You are playing for {{ sec }}:{{ mSec }}</p>
+
+      <div class="text">
+        <label for="selectInput">Sort moves</label>
+        <select id="selectInput" [(ngModel)]="filter">
+          <option value="asc">Asc</option>
+          <option value="desc">Desc</option>
+        </select>
+
+        <p class="text">List of moves:</p>
+        <p
+          class="text"
+          *ngFor="let action of actionList | sort : filter : actionList.length"
+        >
+          You moved {{ action.actionName }} at {{ action.actionSec }}:{{
+            action.actionMsec
+          }}
+        </p>
+      </div>
+
+      <div [ngClass]="{ highContrast: gameParameter == 'contrast' }">
+        <div class="action-buttons">
+          <button (click)="game.actionStart(); start()" class="button">
+            Start
+          </button>
+          <button (click)="game.actionStop(); stop()" class="button">
+            Stop
+          </button>
+          <button (click)="game.actionReset(); reset()" class="button">
+            Reset
+          </button>
+          <button (click)="exit()" class="button">Exit</button>
+          <br />
+          <button (click)="game.actionUp(); getAction('Up')" class="button">
+            &#8593;
+          </button>
+          <button (click)="game.actionLeft(); getAction('Left')" class="button">
+            &#8592;
+          </button>
+          <button
+            (click)="game.actionRight(); getAction('Right')"
+            class="button"
+          >
+            &#8594;
+          </button>
+          <button (click)="game.actionDown(); getAction('Down')" class="button">
+            &#8595;
+          </button>
+          <br />
+
+          <button (click)="highscores()" class="button">Highscores</button>
+          <button (click)="changeContrast()" class="button">
+            Change contrast
+          </button>
+        </div>
+        <div class="game">
+          <ngx-snake
+            [ngClass]="{ 'black-and-white': gameParameter == 'contrast' }"
+            #game
+            (foodEaten)="increasePoints()"
+            (gameOver)="gameOver()"
+          ></ngx-snake>
+        </div>
+        <br />
+        <br />
+      </div>
+    </div>
+  </div>
+</body>

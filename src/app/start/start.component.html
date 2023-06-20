@@ -1,0 +1,51 @@
+<header>Welcome! This is the game</header>
+<body>
+  <form
+    [formGroup]="userForm"
+    (ngSubmit)="onSubmit(userForm.value); userForm.reset()"
+  >
+    <div class="box">
+      <h1>Fill the form to continue</h1>
+      <label>
+        <span>Player name:</span>
+        <input
+          class="wpis"
+          type="text"
+          id="userName"
+          placeholder="Username"
+          formControlName="userName"
+        />
+
+        <p
+          *ngIf="
+            userForm.get('userName')?.invalid && userForm.get('userName')?.dirty
+          "
+        >
+          Name is required. Minimum length of name is 4 and maximium is 14!
+        </p>
+      </label>
+      <br />
+      <label>
+        <span>Player token:</span>
+        <input
+          class="wpis"
+          type="text"
+          placeholder="Token"
+          id="token"
+          formControlName="token"
+        />
+      </label>
+      <br />
+      <div>
+        <select class="wpis" id="setColor" formControlName="color">
+          <option value="normalColor">Normal colors</option>
+          <option value="contrast">High contrast</option>
+        </select>
+      </div>
+
+      <button class="button" type="submit" [disabled]="!userForm.valid">
+        Start the game
+      </button>
+    </div>
+  </form>
+</body>
